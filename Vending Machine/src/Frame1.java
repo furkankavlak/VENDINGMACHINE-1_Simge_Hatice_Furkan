@@ -3,15 +3,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 
 import java.awt.Font;
 
@@ -47,10 +44,10 @@ public class Frame1 {
 	JLabel balanceLabel = new JLabel(machine.getBalance() + " ₺");
 	
 	// Product List Model
-	public static DefaultListModel productListModel = new DefaultListModel();
+	public static DefaultListModel<String> productListModel = new DefaultListModel<String>();
 	
 	// Product JList
-	public static JList<String> productList = new JList();
+	public static JList<String> productList = new JList<String>();
 	
 	/**
 	 * Functions
