@@ -141,4 +141,32 @@ public class MachineJUnitTest {
         assertNotEquals(10 , machine.getBalance(), 0.01);
     }
 
+	
+	@Test
+	public void CheckInStock(){
+		Machine machine = new Machine(); // Create a machine
+		machine.addProduct("Cola", 2.5, 1); // Add a product to the machine
+	    
+        machine.addCoin(20); // Adding coin to the machine
+	    
+        String product = machine.giveProduct(0); // Buy a Cola
+        
+        // Return should not be "Out of Stock"
+        assertNotEquals("Out of Stock" , product);
+	}
+
+	
+	@Test
+	public void CheckOutOfStock(){
+		Machine machine = new Machine(); // Create a machine
+		machine.addProduct("Cola", 2.5, 0); // Add a product to the machine without stock
+	    
+        machine.addCoin(20); // Adding coin to the machine
+	    
+        String product = machine.giveProduct(0); // Buy a Cola
+        
+        // Return should be "Out of Stock"
+        assertEquals("Out of Stock" , product);
+	}
+
 }
