@@ -30,16 +30,21 @@ public class Machine {
 	public String giveProduct(int id){
 		Product product = Products.get(id); // Find the product with index key
 		if(Balance >= product.getPrice()){ // If balance is enough
-			Balance -= product.getPrice(); // Take out the product's price from the balance
-			return product.getName(); // Return the product's name
+			if(product.getStock() > 0){ // If product is in stock
+				Balance -= product.getPrice(); // Take out the product's price from the balance
+				product.detractStock(); // Detract 1 from product's stock
+				return product.getName(); // Return the product's name
+			} else { // If product doesn't have stock
+				return "Out of Stock"; // Return an error message
+			}
 		} else { // If balance is not enough
 			return "Insufficient Balance"; // Return an error message
 		}
 	}
 	
 	// Add Product to Machine Method
-	public void addProduct(String name, double price){
-		Products.add(new Product(name, price)); // Add the product to Products list with name and price meta 
+	public void addProduct(String name, double price, int stock){
+		Products.add(new Product(name, price, stock)); // Add the product to Products list with name and price meta
 	}
 	
 	// Get Products Method

@@ -1,6 +1,7 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
@@ -45,6 +46,12 @@ public class Frame1 {
 	// Balance Label Declaration
 	JLabel balanceLabel = new JLabel(machine.getBalance() + " ₺");
 	
+	// Product List Model
+	public static DefaultListModel productListModel = new DefaultListModel();
+	
+	// Product JList
+	public static JList<String> productList = new JList();
+	
 	/**
 	 * Functions
 	 */
@@ -59,6 +66,15 @@ public class Frame1 {
 	public void updateBalance(){
 		balanceLabel.setText(String.format("%.2f", machine.getBalance()) + " ₺"); // Update the balance label
 	}
+	
+	// Refresh/Load the Product List Function
+	public void refreshProductList(){
+		productListModel.clear();
+		for(Product product : machine.GetProducts()){
+			productListModel.addElement(product.getName() + " - " + product.getPrice() + "₺" + " (Stock: " + product.getStock() + ")");
+		}
+		productList.setModel(productListModel);
+	}
 
 
 	/**
@@ -67,30 +83,24 @@ public class Frame1 {
 	private void initialize() {
 		
 		// Machine Products
-		machine.addProduct("Coca-Cola", 2.5);
-		machine.addProduct("Diet Coca-Cola", 2.5);
-		machine.addProduct("Coca-Cola Zero", 2.5);
-		machine.addProduct("Ice Tea", 2.5);
-		machine.addProduct("Redbull", 2.5);
-		machine.addProduct("Burn", 2.5);
-		machine.addProduct("Orange Juice", 1.75);
-		machine.addProduct("Apple Juice", 1.75);
-		machine.addProduct("Cranberry Juice", 1.75);
-		machine.addProduct("Grapefruit Juice", 1.75);
-		machine.addProduct("Snickers", 2);
-		machine.addProduct("Kit Kat", 1.5);
-		machine.addProduct("Twix", 1);
-		machine.addProduct("M&M Peanuts", 1.5);
-		machine.addProduct("Cheetos", 3);
+		machine.addProduct("Coca-Cola", 2.5, 5);
+		machine.addProduct("Diet Coca-Cola", 2.5, 5);
+		machine.addProduct("Coca-Cola Zero", 2.5, 5);
+		machine.addProduct("Ice Tea", 2.5, 5);
+		machine.addProduct("Redbull", 2.5, 2);
+		machine.addProduct("Burn", 2.5, 2);
+		machine.addProduct("Orange Juice", 1.75, 1);
+		machine.addProduct("Apple Juice", 1.75, 3);
+		machine.addProduct("Cranberry Juice", 1.75, 4);
+		machine.addProduct("Grapefruit Juice", 1.75, 1);
+		machine.addProduct("Snickers", 2, 8);
+		machine.addProduct("Kit Kat", 1.5, 6);
+		machine.addProduct("Twix", 1, 4);
+		machine.addProduct("M&M Peanuts", 1.5, 2);
+		machine.addProduct("Cheetos", 3, 3);
 		
-		// Take Products from Machine
-		ArrayList<String> ProductList = new ArrayList<String>(); 
-		for(Product product : machine.GetProducts()){
-			ProductList.add(product.getName() + " - " + product.getPrice() + "₺");
-		}
+		refreshProductList(); // Load the Products List
 		
-		// List the Products
-		JList<String> productList = new JList(ProductList.toArray());
 		productList.setBounds(15, 22, 400, 264);
 		
 		
@@ -236,10 +246,15 @@ public class Frame1 {
 				String product = machine.giveProduct(selectedProduct); // Give Product Function
 				updateBalance(); // Update the Balance Label
 				
-				if(product != "Insufficient Balance") // If balance is enough give the selected product
-					JOptionPane.showMessageDialog(frmVendingMachine, "You bought a/an " + product, "Give the Product", JOptionPane.PLAIN_MESSAGE); // Give a message
-				else // Else  give an error
+				if(product == "Insufficient Balance"){ // If balance isn't enough to take the product
 					JOptionPane.showMessageDialog(frmVendingMachine, "You don't have enough money to take this product", "Insufficient Balance", JOptionPane.ERROR_MESSAGE); // Give an error
+				} else if(product == "Out of Stock") { // If the product is out of stock
+					JOptionPane.showMessageDialog(frmVendingMachine, "This product does not have any stock left. Please buy another product.", "Out of Stock", JOptionPane.ERROR_MESSAGE); // Give an error
+				} else { // If balance is enough and product is in stock give the selected product
+					refreshProductList(); // Refresh the Products List
+					JOptionPane.showMessageDialog(frmVendingMachine, "You bought a/an " + product, "Give the Product", JOptionPane.PLAIN_MESSAGE); // Give a message
+				}
+					
 			}
 		});
 		btnGetProduct.setBounds(15, 296, 200, 40);

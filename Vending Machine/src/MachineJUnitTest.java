@@ -10,7 +10,7 @@ public class MachineJUnitTest {
 	@Test
 	public void AddCoin() {
 	    Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(1); // Adding coin to the machine
         machine.addCoin(5); // Adding coin to the machine
@@ -23,7 +23,7 @@ public class MachineJUnitTest {
 	@Test
 	public void AddCoinBalanceNotEqual() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(1); // Adding coin to the machine
         machine.addCoin(5); // Adding coin to the machine
@@ -36,7 +36,7 @@ public class MachineJUnitTest {
 	@Test
 	public void GiveProduct() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(20); // Adding coin to the machine
 	    
@@ -49,7 +49,7 @@ public class MachineJUnitTest {
 	@Test
 	public void GiveProductNotEqual() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(20); // Adding coin to the machine
         
@@ -62,7 +62,7 @@ public class MachineJUnitTest {
 	@Test
 	public void InsufficientBalance() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(1); // Adding coin to the machine
 	    
@@ -75,7 +75,7 @@ public class MachineJUnitTest {
 	@Test
 	public void EnoughBalance() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(20); // Adding coin to the machine
         
@@ -88,7 +88,7 @@ public class MachineJUnitTest {
 	@Test
 	public void GiveChange() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(5); // Adding coin to the machine
         
@@ -103,7 +103,7 @@ public class MachineJUnitTest {
 	@Test
 	public void GiveChangeNotEqual() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(5); // Adding coin to the machine
         
@@ -118,7 +118,7 @@ public class MachineJUnitTest {
 	@Test
 	public void CheckBalance(){
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(10); // Adding coin to the machine
         
@@ -131,7 +131,7 @@ public class MachineJUnitTest {
 	@Test
 	public void CheckBalanceNotEqual() {
 		Machine machine = new Machine(); // Create a machine
-		machine.addProduct("Cola", 2.5); // Add a product to the machine
+		machine.addProduct("Cola", 2.5, 5); // Add a product to the machine
 	    
         machine.addCoin(5); // Adding coin to the machine
         
